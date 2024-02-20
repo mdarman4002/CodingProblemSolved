@@ -1,0 +1,25 @@
+
+import java.lang.Math;
+
+public class Day2PowerOfTwo_ {
+    public static void main(String[] args) {
+        int n = 10;
+        System.out.println(func(n));
+    }
+
+    public static boolean func(int n) {
+        if (n <= 0) {
+            return false;
+        } else {
+            double sqr = Math.sqrt(n);
+            int sqrInt = (int) sqr;
+            for (int i = 0; i <= sqrInt; i++) {
+                double result = Math.pow(2, i);
+                if (result == n) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+}
