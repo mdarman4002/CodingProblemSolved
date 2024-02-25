@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Solution {
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        List<Integer> output = new ArrayList<>(); // Initialize an ArrayList to store the result
+        int pointer = num.length - 1; // Pointer for traversing the array 'num'
+        int carry = 0; // Variable to store the carry
+
+        // Continue the loop until there are digits remaining in 'num' or 'k' is greater than 0
+        while (pointer >= 0 || k > 0) {
+            int value = 0;
+
+            // Get the current digit from 'num', if available
+            if (pointer >= 0) {
+                value = num[pointer];
+            }
+
+            // Get the last digit of 'k'
+            int lastDigit = k % 10;
+
+            // Calculate the sum of the current digits from 'num', 'k', and the carry
+            int sum = value + lastDigit + carry;
+
+            // Calculate the digit to be added to the result list
+            int digit = sum % 10;
+
+            // Update the carry for the next iteration
+            carry = sum / 10;
+
+            // Add the digit to the result list
+            output.add(digit);
+
+            // Move the pointer to the next digit in 'num'
+            pointer--;
+
+            // Move to the next digit in 'k'
+            k = k / 10;
+        }
+
+        // If there is a remaining carry, add it to the result list
+        if (carry > 0) {
+            output.add(carry);
+        }
+
+        // Reverse the result list to get the correct order of digits
+        Collections.reverse(output);
+
+        // Return the final result list
+        return output;
+    }
+}
