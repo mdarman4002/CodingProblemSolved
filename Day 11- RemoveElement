@@ -1,0 +1,46 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        int size = 0;
+        for(int i:nums){
+            if(i != val){
+                size++;
+            }
+        }
+        int[] newArray = new int[size];
+        int count = 0;
+        
+        for(int i:nums){
+            if (i != val){
+                newArray[count] = i;
+                count++;
+            }
+        }
+
+         for(int i = 0; i < size; i++) {
+            nums[i] = newArray[i];
+        }
+        return size;
+        
+    }
+}
+//------------------------------------other -----------------------------
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int newLength = 0; // Initialize the length of the new array
+
+        // Iterate through the original array
+        for (int i = 0; i < nums.length; i++) {
+            // If the current element is not equal to the value to be removed
+            if (nums[i] != val) {
+                // Copy the current element to the left (to the position of newLength)
+                nums[newLength] = nums[i];
+                // Increment the length of the new array
+                newLength++;
+            }
+        }
+        // Return the length of the new array
+        return newLength;
+    }
+}
