@@ -1,0 +1,67 @@
+// class Solution {
+//     public int maxArea(int[] height) {
+//         int max = 0;
+//         int smax = 0;
+//         int output;
+
+// // finding uique number using hashtable
+//         int len = height.length;
+//         HashSet<Integer> hashset = new HashSet<>();
+//          for (int i = 0; i < len; i++){ 
+//             if (!hashset.contains(height[i])){   
+//                 hashset.add(height[i]);   
+//             }   
+//         }   
+
+//         for(int i = 0; i < hashset.size(); i++){
+            
+//             if(hashset[i] > max){
+//                 smax = max;
+//                 max = hashset[i];
+//             }
+//             else if(hashset[i] > smax ){
+//                 smax = hashset[i];
+//             }
+//         }
+//         output = (smax * smax);
+//         return output;
+//     }
+// }
+class Solution {
+    public int maxArea(int[] height) {
+        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
+
+        while(left < right){
+            int area = Math.min(height[left],height[right]) * (right- left);
+            maxArea = Math.max(maxArea, area);
+
+            if(height[left] < height[right]){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return maxArea;
+        
+    }
+}
+//-------------------------- others--------------------------
+
+class Solution {
+    public int maxArea(int[] height) {
+        int i = 0, j = height.length-1;
+        int ans = Integer.MIN_VALUE;
+        while (i < j){
+            int min = Math.min(height[i], height[j]);
+            ans = Math.max(ans, (j-i) * min);
+
+            while (i<j && height[i]<=min) i++;
+            while (i<j && height[j]<=min) j--;
+        }
+
+        return ans;
+    }
+}
