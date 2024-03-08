@@ -1,0 +1,54 @@
+
+import java.util.Arrays;
+
+class Solution {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 2, 3, 3, 3};
+        System.out.println(findLucky(arr));
+    }
+
+    public static int findLucky(int[] arr) {
+        int arrlen = arr.length;
+        int[] frqstore = new int[arrlen];
+        int i;
+        Arrays.sort(arr);
+        int count = 1; 
+
+        for (i = 0; i <= arrlen - 2; i++) {
+            if (arr[i] == arr[i + 1]) {
+                count++;
+            } else {
+                frqstore[i] = count;
+                count = 1; 
+            }
+        }
+
+        
+        frqstore[arrlen - 1] = count;
+
+        int maxLucky = -1; 
+        for (int j = 0; j < arrlen; j++) {
+            if (frqstore[j] == arr[j]) {
+                maxLucky = Math.max(maxLucky, arr[j]); 
+            }
+        }
+
+        return maxLucky;
+    }
+}
+//----------------------------------others, which is better than me -----------------
+class Solution {
+    public int findLucky(int[] arr) {
+        int max = -1;
+        int[] nums=new int[501];
+        for(int i:arr){
+            nums[i]++;
+        }
+        for(int j=1;j<nums.length;j++){
+           if(j==nums[j]){
+               max=Math.max(max,nums[j]);
+           }
+        }
+        return max;
+    }
+}
