@@ -1,0 +1,63 @@
+class Solution {
+    public String largestNumber(int[] nums) {
+      String[] arr = new String[nums.length];
+
+      for(int i=0;i<nums.length;i++){
+          arr[i]=nums[i]+"";
+      }
+
+      Arrays.sort(arr,(s1,s2)->(s1+s2).compareTo(s2+s1));
+      StringBuilder sb = new StringBuilder("");
+
+      for(int i=arr.length-1;i>=0;i--){
+          sb.append(arr[i]);
+      }
+
+      if(sb.charAt(0)=='0'){
+          return "0";
+      }else{
+          return sb.toString();
+      }
+    }
+}
+
+--------------------------- other's --------------------------------
+class Solution {
+void divide(int[] nums,int st,int end){
+        if(st==end)return ;
+        int mid=st+(end-st)/2;
+        divide(nums,st,mid);
+        divide(nums,mid+1,end);
+        merge(nums,st,mid,end);
+    }
+void merge(int[] a,int low,int mid,int high){
+    int temp[]=new int[high-low+1];
+        int i=low,j=mid+1,k=0;
+        while(i<=mid && j<=high){
+
+            long n= 10,m=10;
+            while(a[i] >= n)  n *= 10;
+            while(a[j] >= m)  m *= 10;
+            
+            long l=a[i]*m+a[j];
+            long h=a[j]*n+a[i];
+            if(l>h)temp[k++]=a[i++];
+            else temp[k++]=a[j++];
+        }
+        while(i<=mid)temp[k++]=a[i++];
+        while(j<=high)temp[k++]=a[j++];
+        k=0;
+        i=low;
+        while(i<=high){
+            a[i++]=temp[k++];
+        }
+}
+public String largestNumber(int[] nums) {
+    divide(nums,0,nums.length-1);
+    StringBuilder s=new StringBuilder();
+    for(int i=0;i<nums.length;i++){
+        s.append(nums[i]);
+    }
+    return nums[0]==0?"0":s.toString();
+}
+}
