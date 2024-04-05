@@ -1,0 +1,123 @@
+class MyQueue {
+     private Stack<Integer> main;
+     private Stack<Integer> helper;
+
+    public MyQueue() {
+        main = new Stack<>();
+        helper = new Stack<>();
+    }
+
+    public void push(int x) {
+        // add all elements of main to helper -- main --> helper
+
+        while(main.size()>0){
+            helper.push(main.pop());
+        }
+
+        // add x to main
+
+        main.push(x);
+
+        // add all elemets from helper to main -- helper ---> main
+
+        while(helper.size()>0){
+            main.push(helper.pop());
+        }
+    }
+
+    public int pop() {
+        return main.pop();
+    }
+
+    public int peek() {
+        return main.peek();
+    }
+
+    public boolean empty() {
+        return main.size()==0;
+    }
+}
+
+--------------------------------------------- Documentaion---------------------------------------
+
+Class MyQueue:
+    - Description: Implements a queue using two stacks.
+
+    Fields:
+        - main: Stack<Integer> - The main stack to store elements in queue order.
+        - helper: Stack<Integer> - A helper stack used for push operation.
+
+    Constructor:
+        - MyQueue(): Initializes the main and helper stacks.
+
+    Methods:
+        - push(int x):
+            Description: Adds an element to the end of the queue.
+            Steps:
+                1. Move all elements from main to helper, reversing their order.
+                2. Push the new element 'x' to the main stack.
+                3. Move all elements from helper back to main, restoring the original order.
+
+        - pop():
+            Description: Removes and returns the front element from the queue.
+            Returns:
+                - int: The front element of the queue (removed).
+
+        - peek():
+            Description: Returns the front element of the queue without removing it.
+            Returns:
+                - int: The front element of the queue.
+
+        - empty():
+            Description: Checks if the queue is empty.
+            Returns:
+                - boolean: True if the queue is empty, false otherwise.
+
+
+----------------------------------Explaination---------------------------------------------
+
+
+
+Certainly! Let's provide a concise documentation for the MyQueue class and its methods:
+
+plaintext
+Copy code
+Class MyQueue:
+    - Description: Implements a queue using two stacks.
+
+    Fields:
+        - main: Stack<Integer> - The main stack to store elements in queue order.
+        - helper: Stack<Integer> - A helper stack used for push operation.
+
+    Constructor:
+        - MyQueue(): Initializes the main and helper stacks.
+
+    Methods:
+        - push(int x):
+            Description: Adds an element to the end of the queue.
+            Steps:
+                1. Move all elements from main to helper, reversing their order.
+                2. Push the new element 'x' to the main stack.
+                3. Move all elements from helper back to main, restoring the original order.
+
+        - pop():
+            Description: Removes and returns the front element from the queue.
+            Returns:
+                - int: The front element of the queue (removed).
+
+        - peek():
+            Description: Returns the front element of the queue without removing it.
+            Returns:
+                - int: The front element of the queue.
+
+        - empty():
+            Description: Checks if the queue is empty.
+            Returns:
+                - boolean: True if the queue is empty, false otherwise.
+-------------------------------------Explanation----------------------------------------
+
+The MyQueue class implements a queue using two stacks (main and helper).
+The push method efficiently adds elements to the queue by utilizing the helper stack to reverse the order temporarily.
+The pop method removes and returns elements from the front of the queue, leveraging the main stack's behavior.
+The peek method allows peeking at the front element without removing it.
+The empty method checks if the queue is empty based on the size of the main stack.
