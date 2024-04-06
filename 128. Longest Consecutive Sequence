@@ -1,0 +1,60 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashMap<Integer,Boolean> hm = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            hm.put(nums[i],false);
+        }
+
+        for(int key : hm.keySet()){
+            if(hm.containsKey(key-1)==false){
+                hm.put(key,true);
+            }
+        }
+
+        int max = 0 ;
+        for(int key : hm.keySet()){
+            int k=1 ;
+            if(hm.get(key)==true){
+                while(hm.containsKey(key+k)==true){
+                    k++;
+                }
+            }
+            max = Math.max(max,k);
+        }
+        return max ;
+    }
+}
+
+
+------------------------------Documentation-----------------------------------------
+
+Method longestConsecutive:
+    - Description: Finds the length of the longest consecutive sequence in an array of integers.
+
+    Parameters:
+        - nums: int[] - Input array of integers.
+
+    Returns:
+        - int: Length of the longest consecutive sequence.
+
+    Steps:
+        1. Create a HashMap `hm` to store each number from the input array as keys and their presence as values (initially set to false).
+        2. Iterate through the input array `nums` and populate the HashMap `hm` with numbers from the array as keys and set their corresponding values to false.
+        3. Iterate through the keys of `hm`:
+            a. For each key, check if the key-1 is not present in `hm` (indicating the start of a sequence).
+            b. If key-1 is not present, set the value of the current key to true, marking it as the start of a sequence.
+        4. Initialize a variable `max` to 0 to keep track of the maximum consecutive sequence length.
+        5. Iterate through the keys of `hm` again:
+            a. For each key, if its value is true (indicating it's the start of a sequence):
+                - Initialize a variable `k` to 1 (representing the current consecutive length).
+                - While `hm` contains key+k (indicating consecutive numbers), increment `k`.
+            b. Update `max` by taking the maximum of its current value and `k`.
+        6. Return the value of `max`, which represents the length of the longest consecutive sequence in the input array.
+
+
+Explanation:
+
+The longestConsecutive method uses a HashMap to efficiently determine the length of the longest consecutive sequence in an array of integers.
+It marks the start of a sequence when it finds a number that does not have the previous number in the sequence present in the HashMap.
+Then, it iterates through the HashMap to find consecutive numbers and calculates the length of each sequence, updating the max variable with the maximum length encountered.
+Finally, it returns the length of the longest consecutive sequence found.
