@@ -1,0 +1,69 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int ele;
+        int output = 0;
+        for(int i = 0; i < nums.length; i++){
+            ele = nums[i];
+            ele = Math.abs(ele);
+
+            if(nums[ele] > 0){
+                nums[ele] = -nums[ele];
+            }
+            else{
+                output = ele;
+                break;
+            }
+        }
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = Math.abs(nums[i]);
+        }
+        return output;
+
+        
+    }
+}
+---------------------------------------Documentation------------------------------------------
+
+Method findDuplicate:
+    - Description: Finds a duplicate number in the given array of integers.
+
+    Parameters:
+        - nums: int[] - Input array of integers.
+
+    Returns:
+        - int: The duplicate number found in the array.
+
+    Steps:
+        1. Declare variables 'ele' and 'output'.
+        2. Initialize 'output' to 0.
+        3. Iterate through the input array 'nums':
+            a. Retrieve the element at the current index and store it in 'ele'.
+            b. Take the absolute value of 'ele' using 'Math.abs(ele)' to handle negative values.
+            c. Check if the element at index 'ele' in 'nums' is greater than 0:
+                - If yes, set 'nums[ele]' to its negative value (-nums[ele]) to mark it as visited.
+                - If no, set 'output' to 'ele' (found the duplicate) and break the loop.
+        4. Iterate through 'nums' to restore all elements to their absolute values.
+        5. Return 'output', which contains the duplicate number found.
+
+
+-----------------------------------Other's solution which is better than me -----------------------------
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        // Initialize a boolean array to keep track of visited numbers
+        boolean[] taken = new boolean[nums.length];
+        
+        // Iterate through the input array nums
+        for (int num : nums) {
+            // If the current number has already been visited (taken), it's a duplicate
+            if (taken[num]) {
+                return num; // Return the duplicate number
+            }
+            // Mark the current number as visited
+            taken[num] = true;
+        }
+        
+        // If no duplicate is found, return 0 (assuming 0 is not a possible value in nums)
+        return 0;
+    }
+}
