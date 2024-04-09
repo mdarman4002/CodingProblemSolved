@@ -1,0 +1,65 @@
+
+class Solution {
+    public static int pivotIndex(int[] nums) {
+        int leftsum = 0;
+        int rightsum = 0;
+        int pivotindex = -1;
+        
+        for(int i = 0 ; i < nums.length; i++){
+            rightsum += nums[i];
+        }
+
+        for(int i = 0 ; i < nums.length; i++){
+            rightsum -= nums[i];
+            
+
+            if(rightsum != leftsum){
+                leftsum += nums[i];
+                
+            }
+            else if(rightsum == leftsum){
+                pivotindex = i;
+                break;
+            }
+        }
+        
+        return pivotindex;
+    }
+    public static void main(String[] args) {
+        int[] nums = {1,7,3,6,5,6};
+        System.out.println(pivotIndex(nums));
+    }
+}
+
+
+-------------------Documentation ------------------------------
+Class: FindPivotIndex
+
+Description:
+This class provides a method to find the pivot index within an array of integers. The pivot index is the index where the sum of the numbers to the left of the index is equal to the sum of the numbers to the right of the index.
+
+Method: pivotIndex(int[] nums)
+
+Description:
+This method takes an array of integers as input and returns the index of the pivot if it exists, otherwise it returns -1. It uses a two-pass algorithm to calculate the left and right sums and determine the pivot index.
+
+Parameters:
+- nums: An array of integers where the pivot index needs to be found.
+
+Returns:
+- The index of the pivot if found, otherwise -1.
+
+Method: main(String[] args)
+
+Description:
+The main method is used to test the pivotIndex method with a sample input array. It initializes an array with sample values and prints the result of the pivotIndex method.
+
+Parameters:
+- args: Unused in this context.
+
+Usage:
+1. Create an instance of the FindPivotIndex class.
+2. Call the pivotIndex method with an array of integers to find the pivot index.
+3. Handle the returned pivot index value accordingly (-1 if pivot not found, otherwise the actual index).
+
+
