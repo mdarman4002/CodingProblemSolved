@@ -1,0 +1,48 @@
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        Arrays.sort(people);
+        int start = 0;
+        int end = people.length-1;
+        int count = 0;
+
+        while(start <= end){
+            if((people[start] + people[end]) <= limit){
+                start ++;
+                end --;
+            }
+            else{
+                end--;
+            }
+            count++;
+        }
+        return count;
+    }
+}
+---------------------------------Documentation --------------------------------------
+
+Class: Solution
+
+Description:
+This class contains a method to calculate the minimum number of boats required to rescue people given their weights and a weight limit per boat. The method sorts the people array and then iterates through it to pair people into boats based on the weight limit.
+
+Method: numRescueBoats(int[] people, int limit)
+
+Description:
+This method calculates the minimum number of boats required to rescue people based on their weights and the weight limit per boat.
+
+Parameters:
+- people: An array of integers representing the weights of people to be rescued.
+- limit: An integer representing the weight limit per boat.
+
+Returns:
+- The minimum number of boats required to rescue all people.
+
+Algorithm:
+1. Sort the 'people' array in ascending order.
+2. Initialize 'start' to 0 (start index of the sorted array), 'end' to the last index of the array, and 'count' to 0 (initial boat count).
+3. Use a while loop with the condition 'start <= end':
+   a. Check if the sum of weights at 'start' and 'end' indices is less than or equal to 'limit':
+      - If yes, increment 'start' and decrement 'end' (move towards the center of the sorted array).
+      - If no, decrement 'end' (move towards lower weights).
+   b. Increment 'count' for each iteration.
+4. Return the final 'count' as the minimum number of boats required.
