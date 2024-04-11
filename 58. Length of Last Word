@@ -1,0 +1,47 @@
+class Solution {
+    public int lengthOfLastWord(String s) {
+        s = s.trim();
+        int len = s.length();
+        int count = 0;
+        if(s.isEmpty()){
+            return 0;
+        }
+        for(int i = len-1; i >= 0; i--){
+            char ch = s.charAt(i);
+            if(ch != ' '){
+                count++;
+            }
+            else{
+                break;
+            }
+        }
+        return count;
+    }
+}
+
+-----------------Document-------------------------
+Class: Solution
+
+Description:
+This class contains a method to calculate the length of the last word in a given string. It trims the input string to remove leading and trailing whitespace and then counts the characters of the last word.
+
+Method: lengthOfLastWord(String s)
+
+Description:
+This method calculates the length of the last word in the given string.
+
+Parameters:
+- s: A string from which the length of the last word needs to be calculated.
+
+Returns:
+- The length of the last word in the string.
+
+Algorithm:
+1. Trim the input string 's' to remove leading and trailing whitespace.
+2. Get the length of the trimmed string and initialize 'count' to 0.
+3. If the trimmed string is empty, return 0 (no last word).
+4. Iterate backward through the trimmed string starting from the last character:
+   a. Check if the character at the current index is not a space:
+      - If yes, increment 'count'.
+      - If no (encounter a space), break the loop as the last word's characters are counted.
+5. Return the final 'count' as the length of the last word.
