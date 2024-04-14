@@ -1,0 +1,42 @@
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        char[] Jewels = jewels.toCharArray();
+        char[] Stones = stones.toCharArray();
+        int count = 0;
+        for(int i = 0; i < jewels.length(); i++ ){
+            for(int j = 0; j < stones.length(); j++){
+                if (Jewels[i] == Stones[j]){
+                    count++;
+                }
+            }
+        }return count;
+    }
+}
+
+---------------------Documentation ---------------------------
+
+Class: Solution
+
+Description:
+This class contains a method to count the number of jewels that appear in a given collection of stones. It compares each character in the jewels string with each character in the stones string to count the occurrences.
+
+Method: numJewelsInStones(String jewels, String stones)
+
+Description:
+This method calculates the number of jewels that appear in the given collection of stones.
+
+Parameters:
+- jewels: A string representing the types of jewels (unique characters).
+- stones: A string representing a collection of stones where jewels may appear.
+
+Returns:
+- The count of jewels that appear in the stones collection.
+
+Algorithm:
+1. Convert the jewels and stones strings into character arrays for efficient character comparison.
+2. Initialize a variable 'count' to 0 to store the count of jewels found.
+3. Use nested loops to compare each character in 'jewels' with each character in 'stones':
+   a. If a character in 'jewels' matches a character in 'stones', increment the 'count' variable.
+4. Return the final 'count' as the number of jewels found in stones.
+
+
