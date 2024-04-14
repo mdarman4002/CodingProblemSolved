@@ -1,0 +1,69 @@
+class Solution {
+    public String removeDuplicateLetters(String s) {
+        int[] lastIndex = new int[26];
+
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            int idx = (int)(ch-'a');
+
+            lastIndex[idx]= i ;
+        }
+
+        boolean[] present = new boolean[26];
+
+        Stack<Character> st = new Stack<>();
+
+        for(int i=0;i<s.length();i++){
+              char ch = s.charAt(i);
+            int idx = (int)(ch-'a');
+
+            if(present[idx]==false){
+                while(st.size()>0 && st.peek()>ch && lastIndex[(int)(st.peek()-'a')]>i){
+                    present[(int)(st.peek()-'a')]=false;
+                    st.pop();
+                }
+
+                st.push(ch);
+                present[idx]=true ;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder("");
+
+        while(st.size()>0){
+            sb.append(st.pop());
+        }
+
+        return sb.reverse().toString();
+    }
+}
+
+-----------------------------------Documents -------------------------------------
+Class: Solution
+
+Description:
+This class contains a method to remove duplicate letters from a given string while maintaining the lexicographical order of the remaining characters.
+
+Method: removeDuplicateLetters(String s)
+
+Description:
+This method removes duplicate letters from the input string 's' while preserving the order of characters based on their appearance in the original string.
+
+Parameters:
+- s: A string from which duplicate letters need to be removed.
+
+Returns:
+- A string with duplicate letters removed and maintaining lexicographical order.
+
+Algorithm:
+1. Initialize an array 'lastIndex' of size 26 to store the last index of each character in the input string 's'.
+2. Iterate through 's' to populate 'lastIndex' with the last index of each character.
+3. Initialize a boolean array 'present' to track the presence of characters in the stack.
+4. Initialize a stack 'st' to store characters while maintaining the order.
+5. Iterate through 's' again:
+   a. If the character is not present in the stack:
+      - Pop characters from the stack that are greater than the current character and have a later occurrence in 's'.
+      - Push the current character onto the stack and mark it as present.
+6. Build the result string using a StringBuilder by popping characters from the stack.
+7. Reverse the StringBuilder to obtain the final result.
+
