@@ -1,0 +1,66 @@
+class Solution {
+    public String reverseWords(String s) {
+        String[] str = s.trim().split("\\s+"); 
+        Collections.reverse(Arrays.asList(str));
+        return String.join(" ", str);
+    }
+}
+
+----------------------------------Documentation ----------------------------------
+Class: Solution
+
+Description:
+This class contains a method to reverse the order of words in a given string while preserving the spaces between words.
+
+Method: reverseWords(String s)
+
+Description:
+This method reverses the order of words in the input string 's' while keeping the spaces intact.
+
+Parameters:
+- s: A string containing words separated by spaces that needs to be reversed.
+
+Returns:
+- A string with the order of words reversed.
+
+Algorithm:
+1. Trim the input string 's' to remove leading and trailing whitespace.
+2. Split the trimmed string into an array of words using the regular expression "\\s+" to handle multiple spaces as delimiters.
+3. Convert the array of words into a List and reverse its order using Collections.reverse method.
+4. Join the reversed words in the List using spaces as separators to form the final reversed string.
+
+Example Usage:
+String input = "the sky is blue";
+Solution solution = new Solution();
+String reversed = solution.reverseWords(input);
+System.out.println("Reversed words: " + reversed);
+
+-----------------------------------Others -----------------------------
+class Solution {
+    public String reverseWords(String s) {
+
+        
+        char[] str  = s.toCharArray();
+        char[] r = new char[s.length()+1];
+
+        int l =  s.length() - 1;
+        int j;
+        int k = 0;
+
+        while(l>=0){
+            while(l>=0 && str[l] == ' '){
+                l--;
+            }
+            if(l<0) break;
+            j = l;
+            while(l>=0 && str[l]!=' '){
+                l--;
+            }
+            for(int i = l+1;i<=j;i++){
+                r[k++] = str[i];
+            }
+            r[k++] = ' ';
+        }
+        return new String(r, 0 ,k-1);
+    }
+}
