@@ -1,0 +1,58 @@
+//1897. Redistribute Characters to Make All Strings Equal
+
+class Solution {
+    public boolean makeEqual(String[] words) {
+        int[] frequency = new int[26];
+
+        for(int i = 0 ; i < words.length; i++){
+            String i_word = words[i];
+            for(int j = 0; j < i_word.length(); j++){
+                char ch = i_word.charAt(j);
+                int index = (int)(ch - 'a');
+
+                frequency[index] += 1;
+            }
+        }
+
+        for(int i = 0; i < frequency.length; i++){
+            if(frequency[i] % words.length != 0){
+                return false;
+            }
+            
+        
+        }
+        return true;
+    }
+}
+
+------------------------Documentation --------------------------------
+
+Class: Solution
+
+Description:
+This class contains a method to check if it is possible to make all strings in an array equal by rearranging their characters.
+
+Method: makeEqual(String[] words)
+
+Description:
+This method checks if it's possible to rearrange characters within the strings in the input array 'words' such that all strings become equal.
+
+Parameters:
+- words: An array of strings to be checked for equality.
+
+Returns:
+- true if it's possible to make all strings equal, false otherwise.
+
+Algorithm:
+1. Initialize an integer array 'frequency' of size 26 to store the frequency of each character.
+2. Iterate through each string in the 'words' array:
+   a. Iterate through each character in the current string and update the frequency array accordingly.
+3. After counting frequencies for all strings, check if the frequency of each character is divisible by the total number of strings in 'words'.
+4. If any character's frequency is not divisible by the total number of strings, return false as it's not possible to make all strings equal.
+5. If all characters' frequencies are divisible, return true indicating it's possible to make all strings equal.
+
+Example Usage:
+String[] words = {"abc", "bca", "cba"};
+Solution solution = new Solution();
+boolean canMakeEqual = solution.makeEqual(words);
+System.out.println("Can make equal: " + canMakeEqual);
