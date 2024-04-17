@@ -1,0 +1,80 @@
+class Solution {
+    public boolean isPalindrome(String s) {
+        if(s.length() == 0 || s.length() == 1){
+            return true;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            if(ch >='a' && ch <='z'){
+                sb.append(ch);
+            }
+            else if(ch >= 'A' && ch <= 'Z'){
+                ch = (char)(ch - 'A' + 'a');
+                sb.append(ch);
+            }
+            else if(ch >= '0' && ch <= '9'){
+                sb.append(ch);
+            }
+        }
+        int start = 0;
+        int end = sb.length()-1;
+
+        while(start < end){
+            char startChar = sb.charAt(start);
+            char endChar = sb.charAt(end);
+            if(startChar != endChar){
+                return false;
+            }
+            start++;
+            end--;
+            // if(sb[start] != sb[end]){
+            //     return false;
+            // }
+            // else{
+            //     start++;
+            //     end--;
+            // }
+        }
+        return true;
+    }
+}
+
+----------------------------Documentation ----------------------------
+
+Class: Solution
+
+Description:
+This class contains a method to check if a given string is a palindrome after removing non-alphanumeric characters and ignoring case.
+
+Method: isPalindrome(String s)
+
+Description:
+This method checks if the input string 's' is a palindrome after converting it to lowercase, removing non-alphanumeric characters, and comparing characters from both ends of the string.
+
+Parameters:
+- s: A string to be checked for palindrome property.
+
+Returns:
+- true if the string is a palindrome after processing, false otherwise.
+
+Algorithm:
+1. Check if the length of the input string 's' is 0 or 1, in which case it's considered a palindrome (base case).
+2. Create a StringBuilder 'sb' to store the processed characters of 's'.
+3. Iterate through each character in 's':
+   a. If the character is a lowercase letter, append it to 'sb'.
+   b. If the character is an uppercase letter, convert it to lowercase and append it to 'sb'.
+   c. If the character is a digit, append it to 'sb'.
+4. Initialize 'start' to 0 and 'end' to the length of 'sb' minus 1.
+5. Use a while loop to compare characters from both ends of 'sb':
+   a. If the characters at 'start' and 'end' positions are not equal, return false as it's not a palindrome.
+   b. Increment 'start' and decrement 'end' for the next comparison.
+6. If the loop completes without returning false, return true indicating a palindrome.
+
+Example Usage:
+String input = "A man, a plan, a canal: Panama";
+Solution solution = new Solution();
+boolean isPalin = solution.isPalindrome(input);
+System.out.println("Is Palindrome: " + isPalin);
