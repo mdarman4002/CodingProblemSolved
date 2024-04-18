@@ -1,0 +1,66 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+
+            int len = s.length();
+            if(len == 0){
+                return true;
+            }
+            
+            for(int i = 0; i < len; i++){
+                char ch = s.charAt(i);
+                if(ch == '(' || ch == '{' || ch == '['){
+                    stack.push(ch);
+                }
+                else if (!stack.isEmpty() && ch == ')' && stack.peek() == '('){
+                    stack.pop();
+
+                }else if (!stack.isEmpty() && ch == '}' && stack.peek() == '{'){
+                    stack.pop();
+
+                }else if (!stack.isEmpty() && ch == ']' && stack.peek() == '['){
+                    stack.pop();
+                }else{
+                   return false; 
+                }
+                //return false;
+            }
+            return stack.isEmpty();
+        
+    }
+}
+
+------------------------Documentation -----------------------
+Class: Solution
+
+Description:
+This class contains a method to check if a given string containing parentheses, curly braces, and square brackets is valid or not according to their nesting rules.
+
+Method: isValid(String s)
+
+Description:
+This method checks if the input string 's' contains validly nested pairs of parentheses, curly braces, and square brackets.
+
+Parameters:
+- s: A string containing parentheses, curly braces, and square brackets to be checked for validity.
+
+Returns:
+- true if 's' contains validly nested pairs, false otherwise.
+
+Algorithm:
+1. Create a stack of characters named 'stack' to store opening symbols.
+2. Get the length of the input string 's' and check if it's empty; if empty, return true (no brackets to validate).
+3. Iterate through each character in 's':
+   a. If the character is an opening bracket ('(', '{', '['), push it onto the stack.
+   b. If the character is a closing bracket (')', '}', ']'), check if the stack is not empty and the top of the stack matches the corresponding opening bracket:
+      - If yes, pop the top element from the stack.
+      - If no, return false immediately as the brackets are not valid.
+4. After iterating through all characters, check if the stack is empty:
+   - If empty, all brackets were matched and validly nested, so return true.
+   - If not empty, there are unmatched brackets, so return false.
+
+Example Usage:
+String input = "((()))";
+Solution solution = new Solution();
+boolean isValid = solution.isValid(input);
+System.out.println("Is Valid: " + isValid);
