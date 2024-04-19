@@ -1,0 +1,85 @@
+class Solution {
+    public int minAddToMakeValid(String s) {
+        //int opening_close_bracket = 0;
+        int result = 0;
+        int open_bracket = 0;
+        int close_bracket = 0;
+        int len = s.length();
+        Stack<Character> stack = new Stack<>();
+        if(len == 0){
+            return 0;
+        }
+        for(int i = 0; i < len; i++){
+            char ch = s.charAt(i);
+            //stack.push(ch);
+            if(stack.isEmpty() && ch == ')'){
+                result++;
+            }
+            else if(ch == '(' ){
+                stack.push(ch);
+                open_bracket++;
+            }
+            else if(stack.size() > 0 && stack.peek() == '(' && ch == ')'){
+                stack.pop();
+                close_bracket++;
+            }
+        }
+        return result + Math.abs(open_bracket - close_bracket);
+    }
+}
+------------other which is better than me ------------------
+class Solution {
+        public int minAddToMakeValid(String S) {
+        int left = 0, right = 0;
+        for (int i = 0; i < S.length(); ++i) {
+            if (S.charAt(i) == '(') {
+                right++;
+            } else if (right > 0) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return left + right;
+    }
+}
+
+
+
+
+
+
+--------Documentation --------------------
+Class: Solution
+
+Description:
+This class contains a method to calculate the minimum number of parentheses that need to be added to a string to make it valid.
+
+Method: minAddToMakeValid(String s)
+
+Description:
+This method calculates the minimum number of parentheses (opening or closing) that need to be added to the input string 's' to make it a valid parentheses sequence.
+
+Parameters:
+- s: A string containing parentheses that needs to be made valid.
+
+Returns:
+- An integer representing the minimum number of parentheses to add.
+
+Algorithm:
+1. Initialize variables 'result', 'open_bracket', and 'close_bracket' to track the counts.
+2. Initialize a stack 'stack' to handle matching parentheses.
+3. Get the length of the input string 's' and handle the case when 's' is empty.
+4. Iterate through each character in 's':
+   a. If the stack is empty and the character is a closing bracket (')'), increment 'result' (unmatched closing bracket).
+   b. If the character is an opening bracket ('('), push it onto the stack and increment 'open_bracket'.
+   c. If the character is a closing bracket and the stack is not empty with a matching opening bracket:
+      - Pop the top element from the stack.
+      - Increment 'close_bracket'.
+5. After the loop, return the sum of 'result' and the absolute difference between 'open_bracket' and 'close_bracket' (remaining unmatched brackets).
+
+Example Usage:
+String input = "())";
+Solution solution = new Solution();
+int minAdd = solution.minAddToMakeValid(input);
+System.out.println("Minimum parentheses to add: " + minAdd);
