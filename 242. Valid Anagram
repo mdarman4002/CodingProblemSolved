@@ -1,0 +1,62 @@
+class Solution {
+    public static void main(String[] args) {
+        String s = "anagram", t = "nagaram";
+        isAnagram(s, t);
+    }
+     public static  boolean isAnagram(String s, String t) {
+   // public  static void isAnagram(String s, String t) {
+        int[] s_Array = new int[26];
+        int[] t_Array = new int[26];
+
+        int slen = s.length(), tlen = t.length();
+        if(slen != tlen){
+            // return false;
+        }
+        for(int i  = 0; i < slen; i++){
+            char s_ch = s.charAt(i);
+            int index_s_ch = s_ch - 'a';
+            s_Array[index_s_ch]++;
+        }
+        for(int j = 0; j < tlen; j++){
+            char t_ch = t.charAt(j);
+            int index_t_ch = t_ch - 'a';
+            t_Array[index_t_ch]++;
+        }
+        for(int k = 0 ; k < 26; k++){
+            if(s_Array[k] != t_Array[k]){
+                return false;
+            }
+        }return true;
+
+    }
+}
+--------------Document-----------------------
+Class: Solution
+
+Description:
+This class contains a method to check if two strings are anagrams of each other.
+
+Method: isAnagram(String s, String t)
+
+Description:
+This method checks if the strings 's' and 't' are anagrams of each other, meaning they contain the same characters with the same frequency.
+
+Parameters:
+- s: The first string to be checked for anagram.
+- t: The second string to be checked for anagram.
+
+Returns:
+- true if 's' and 't' are anagrams, false otherwise.
+
+Algorithm:
+1. Initialize two integer arrays 's_Array' and 't_Array' of size 26 to store the frequency of characters ('a' to 'z') in both strings.
+2. Get the lengths of strings 's' and 't' and compare them; if not equal, return false immediately (anagrams must have the same length).
+3. Iterate through each character in 's' and 't' separately and update their respective arrays with character frequencies.
+4. Compare the frequency arrays 's_Array' and 't_Array'; if any frequency differs, return false indicating not anagrams.
+5. If the loop completes without returning false, return true as 's' and 't' are anagrams of each other.
+
+Example Usage:
+String s = "anagram";
+String t = "nagaram";
+boolean isAnagram = Solution.isAnagram(s, t);
+System.out.println("Are the strings anagrams: " + isAnagram);
