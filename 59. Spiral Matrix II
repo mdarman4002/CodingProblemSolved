@@ -1,0 +1,79 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int minRow = 0;
+        int minColumn = 0;
+        int maxRow = n - 1;
+        int maxColumn = n - 1;
+        int count = 1;
+        int[][] matrix = new int[n][n];
+        
+        while (count <= n * n) {
+            // First row
+            for (int i = minColumn; i <= maxColumn; i++) {
+                matrix[minRow][i] = count;
+                count++;
+            }
+            minRow++;
+            
+            // Last column
+            for (int i = minRow; i <= maxRow; i++) {
+                matrix[i][maxColumn] = count;
+                count++;
+            }
+            maxColumn--;
+            
+            // Last row
+            for (int i = maxColumn; i >= minColumn; i--) {
+                matrix[maxRow][i] = count;
+                count++;
+            }
+            maxRow--;
+            
+            // First column
+            for (int i = maxRow; i >= minRow; i--) {
+                matrix[i][minColumn] = count;
+                count++;
+            }
+            minColumn++;
+        }
+        
+        return matrix;
+    }
+}
+--------------------------Documentation ------------------------
+Class: Solution
+
+Description:
+This class contains a method to generate a square matrix of size n filled with numbers in spiral order.
+
+Method: generateMatrix(int n)
+
+Description:
+This method generates a square matrix of size n filled with numbers in spiral order, starting from 1 and incrementing in a clockwise spiral manner.
+
+Parameters:
+- n: An integer representing the size of the square matrix to be generated.
+
+Returns:
+- A 2D array (matrix) of size n x n filled with numbers in spiral order.
+
+Algorithm:
+1. Initialize variables 'minRow', 'minColumn', 'maxRow', 'maxColumn', and 'count' to manage matrix generation.
+2. Initialize a 2D array 'matrix' of size n x n to store the generated matrix.
+3. Use a while loop to fill the matrix in a clockwise spiral order until 'count' reaches n x n (total elements).
+4. Within each iteration of the loop:
+   a. Fill the first row from 'minColumn' to 'maxColumn' with increasing 'count' values.
+   b. Increment 'minRow' after completing the first row.
+   c. Fill the last column from 'minRow' to 'maxRow' with increasing 'count' values.
+   d. Decrement 'maxColumn' after completing the last column.
+   e. Fill the last row from 'maxColumn' to 'minColumn' with increasing 'count' values.
+   f. Decrement 'maxRow' after completing the last row.
+   g. Fill the first column from 'maxRow' to 'minRow' with increasing 'count' values.
+   h. Increment 'minColumn' after completing the first column.
+5. Return the generated matrix after completing the spiral filling.
+
+Example Usage:
+int n = 3;
+Solution solution = new Solution();
+int[][] spiralMatrix = solution.generateMatrix(n);
+// Print or use 'spiralMatrix' as needed
