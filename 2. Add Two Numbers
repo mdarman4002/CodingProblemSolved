@@ -1,0 +1,99 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // ListNode p1 = l1;
+        // ListNode p2 = l2;
+        // ListNode dummyList = new ListNode();
+        ListNode dummyHead = new ListNode();
+        ListNode current = dummyHead;
+        int carry = 0;
+
+        while (l1 != null || l2 != null) {
+            int sum = carry;
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+        }
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+        return dummyHead.next;
+    }   
+}
+
+-------------------Documentation -------------------
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+Class: Solution
+
+Description:
+This class contains a method to add two numbers represented by linked lists and return the sum as a new linked list.
+
+Method: addTwoNumbers(ListNode l1, ListNode l2)
+
+Description:
+This method adds two numbers represented by the input linked lists 'l1' and 'l2' and returns the sum as a new linked list.
+
+Parameters:
+- l1: The head node of the first linked list representing a number.
+- l2: The head node of the second linked list representing a number.
+
+Returns:
+- The head node of the new linked list representing the sum of 'l1' and 'l2'.
+
+Algorithm:
+1. Initialize a dummyHead node to maintain the starting point of the result linked list.
+2. Initialize a 'current' pointer to track the current node in the result list.
+3. Initialize 'carry' to 0 to handle carry-over digits during addition.
+4. Iterate through 'l1' and 'l2' simultaneously until both are null:
+   a. Calculate the sum of current digits along with the carry and update 'carry'.
+   b. Create a new node with the sum modulo 10 and attach it to the result list.
+   c. Move 'current' to the next node.
+5. After the loop, if 'carry' is still greater than 0, add a new node with 'carry' to the result list.
+6. Return the next node of dummyHead as the head of the resulting linked list.
+
+Example Usage:
+// Define ListNode class and create two linked lists representing numbers
+ListNode num1 = new ListNode(2);
+ListNode num2 = new ListNode(4);
+ListNode num3 = new ListNode(3);
+num1.next = num2;
+num2.next = num3;
+
+ListNode num4 = new ListNode(5);
+ListNode num5 = new ListNode(6);
+ListNode num6 = new ListNode(4);
+num4.next = num5;
+num5.next = num6;
+
+Solution solution = new Solution();
+ListNode sumList = solution.addTwoNumbers(num1, num4);
+// Print or use 'sumList' as needed
+
