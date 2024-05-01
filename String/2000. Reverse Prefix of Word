@@ -1,0 +1,24 @@
+class Solution{
+    public static void main(String[] args) {
+        String word = "abcdefg";
+        char ch = 'd';
+        System.out.println(reversePrefix(word, ch));
+    }
+    public static String reversePrefix(String word, char ch) {
+        
+        int index = word.indexOf(ch);
+        StringBuilder prefix = new StringBuilder(word.substring(0,index+1));
+        String reverse = prefix.reverse().toString();
+        return reverse + word.substring(index +1);
+        // char[] word_ch_array = word.toCharArray();
+        // int out = 0;
+        // int ch_index = word.indexOf(ch);
+        // for(int i=0; i < wordlen; i++){
+        //     if (word_ch_array[i] == ch){
+        //         out +=i;
+        //         break;
+        //     }
+        // }return out;
+
+    }
+}
