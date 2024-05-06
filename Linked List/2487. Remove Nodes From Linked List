@@ -1,0 +1,18 @@
+class Solution {
+    public ListNode removeNodes(ListNode head) {
+        // Base case: If head is null or head.next is null, return head
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Recursively remove nodes from the rest of the list
+        head.next = removeNodes(head.next);
+
+        // Check if the current node should be removed
+        if (head.val < head.next.val) {
+            return head.next; // Skip the current node
+        } else {
+            return head; // Keep the current node
+        }
+    }
+}
