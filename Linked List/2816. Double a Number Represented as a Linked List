@@ -1,0 +1,53 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+import java.util.Stack;
+
+class Solution {
+    public ListNode doubleIt(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        Stack<Integer> st = new Stack<>();
+        ListNode output = null;
+
+        
+        while (head != null) {
+            st.push(head.val);
+            head = head.next;
+        }
+
+        int carry = 0;
+        while (!st.isEmpty()) {
+            int val = st.pop();
+            int val_mul_2 = 2 * val + carry;
+            int rem = val_mul_2 % 10;
+            carry = val_mul_2 / 10;
+
+            ListNode newNode = new ListNode(rem);
+            newNode.next = output; // Append the new node to the output list
+            output = newNode; // Update the output list head
+
+            
+        
+        }
+
+        // Check if there is a carry remaining after processing all digits
+        if (carry > 0) {
+            ListNode newNode = new ListNode(carry);
+            newNode.next = output; 
+            output = newNode;
+        }
+
+        return output;
+    }
+}
+v
