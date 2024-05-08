@@ -1,0 +1,58 @@
+// Import statements for required classes
+import java.util.Arrays;
+
+public class Solution {
+    // Sample main method for testing
+    public static void main(String[] args) {
+        // Sample input scores array
+        int[] scores = {10, 3, 8, 9, 4};
+        // Call the findRelativeRanks method and print the result
+        String[] ranks = findRelativeRanks(scores);
+        System.out.println(Arrays.toString(ranks));
+    }
+
+    // Method to assign relative ranks to scores
+    public static String[] findRelativeRanks(int[] score) {
+        // Length of the input score array
+        int arrlen = score.length;
+        // Create a copy of the input array for sorting
+        int[] copyArray = new int[arrlen];
+        // Output array to store ranks
+        String[] output = new String[arrlen];
+
+        // Copy the input array to the copyArray
+        for (int i = 0; i < arrlen; i++) {
+            copyArray[i] = score[i];
+        }
+
+        // Sort the input array in ascending order
+        Arrays.sort(score);
+
+        // Reverse the sorted array to get descending order (ranking)
+        for (int i = 0; i < arrlen / 2; i++) {
+            int temp = score[i];
+            score[i] = score[arrlen - i - 1];
+            score[arrlen - i - 1] = temp;
+        }
+
+        // Assign ranks based on sorted scores
+        for (int i = 0; i < arrlen; i++) {
+            int rank = i + 1; // Rank starts from 1
+            for (int j = 0; j < arrlen; j++) {
+                if (score[i] == copyArray[j]) {
+                    // Assign appropriate rank or medal based on rank position
+                    if (rank == 1) {
+                        output[j] = "Gold Medal";
+                    } else if (rank == 2) {
+                        output[j] = "Silver Medal";
+                    } else if (rank == 3) {
+                        output[j] = "Bronze Medal";
+                    } else {
+                        output[j] = Integer.toString(rank);
+                    }
+                }
+            }
+        }
+        return output; // Return the array with ranks assigned
+    }
+}
