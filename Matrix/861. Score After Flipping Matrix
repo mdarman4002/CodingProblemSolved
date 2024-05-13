@@ -1,0 +1,40 @@
+class Solution {
+    public int matrixScore(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        // check first value of the row and make 0's to 1
+        for(int i = 0; i < m; i++){
+            if(grid[i][0] == 0){
+                for(int j = 0; j < n; j++){
+                    grid[i][j] ^= 1;
+                }
+            }
+        }
+
+        // check 1's in column wise
+        for(int j = 1; j < n; j++){
+            int countOne = 0;
+            for(int i = 0; i < m; i++){
+                countOne += grid[i][j];
+            }
+           // if(countOne <= m - countOne){
+            if(countOne <= m / 2){
+                for(int i = 0; i < m; i++){
+                    grid[i][j] ^= 1;
+                }
+            }
+        }
+
+        int output = 0;
+        for(int i = 0; i < m; i++){
+            int rowVal = 0;
+            for(int j = 0; j < n; j++){
+                rowVal += grid[i][j] * (1 << (n-1-j));
+            }
+            output += rowVal;
+        }
+
+        return output;
+    }
+}
