@@ -1,0 +1,15 @@
+class Solution {
+    public int subsetXORSum(int[] nums){
+        return subsetXORSum(nums, 0, 0);
+    }
+    private int subsetXORSum(int[] nums, int index, int cur){
+        int len = nums.length;
+        if(index == len){
+           return cur;
+        }
+        int include = subsetXORSum(nums, index+1, cur ^ nums[index]);
+        int exclude = subsetXORSum(nums, index+1, cur);
+        return include + exclude;
+        
+    }
+}
