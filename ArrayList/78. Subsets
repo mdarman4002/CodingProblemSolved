@@ -1,0 +1,22 @@
+class Solution {
+    List<List<Integer>> output = new ArrayList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        findSubsets(nums, 0, new ArrayList<>());
+        return output;
+        
+        
+    }
+    public void findSubsets(int[] nums, int index, List<Integer> sublist){
+        if(index == nums.length){
+            output.add(new ArrayList<>(sublist));
+            return;
+        }
+        // pick the element
+        sublist.add(nums[index]);
+        findSubsets(nums,index+1, sublist);
+        // backtracking , remove the last added element
+        sublist.remove(sublist.size()-1);
+        // if no element pick
+        findSubsets(nums, index+1, sublist);// there are not picked any element therefore no need to remove element
+    }
+}
