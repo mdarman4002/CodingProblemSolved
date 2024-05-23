@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+    private int count = 0;
+
+    public int beautifulSubsets(int[] nums, int k) {
+        // Sort the array (optional for visual clarity, but not necessary)
+        Arrays.sort(nums);
+        
+        // Start backtracking from the first index
+        backtrack(nums, k, 0, new ArrayList<>());
+        
+        return count;
+    }
+
+    private void backtrack(int[] nums, int k, int start, List<Integer> current) {
+      
+        for (int i = start; i < nums.length; i++) {
+            // Check if the current element maintains the beautiful subset condition
+            boolean canAdd = true;
+            for (int num : current) {
+                if (Math.abs(nums[i] - num) == k) {
+                    canAdd = false;
+                    break;
+                }
+            }
+            if (canAdd) {
+                // Add the element to the current subset
+                current.add(nums[i]);
+                // Recurse with the next element
+                backtrack(nums, k, i + 1, current);
+                // Backtrack: remove the last element added
+                current.remove(current.size() - 1);
+            }
+        }
+          // Count all non-empty subsets
+        if (!current.isEmpty()) {
+            count++;
+        }
+
+    }
+}
