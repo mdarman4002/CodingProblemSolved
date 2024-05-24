@@ -1,0 +1,95 @@
+Absolutely! Adding well-structured and clear documentation to the code is essential for
+better understanding and maintainability. Here's an improved version of the documentation for the provided Java solution:
+
+/**
+ * LeetCode Problem 1255 - Maximum Score Words Formed by Letters
+ * 
+ * Given a list of words, each word consists of lowercase letters with scores.
+ * You need to maximize the sum of scores of the words you have formed and make
+ * the sum less than or equal to the given maxScore. 
+ * Each letter's score may be different. You need to have the maximum sum of 
+ * scores formed by the given letters without exceeding the maxScore.
+ */
+class Solution {
+    /**
+     * Calculates the maximum score of words that can be formed using the given letters.
+     * 
+     * @param words Array of words where each word is formed of lowercase letters.
+     * @param letters Array of letters available for forming words.
+     * @param score Array of scores corresponding to each letter of the alphabet.
+     * @return Maximum score that can be achieved by forming words within the given constraints.
+     */
+    public int maxScoreWords(String[] words, char[] letters, int[] score) {
+        // Initialize an array to store the frequency of available letters
+        int[] freq = new int[26];
+        
+        // Calculate the frequency of each letter available for forming words
+        for (char letter : letters) {
+            freq[letter - 'a']++;
+        }
+        
+        // Recursively calculate the maximum score by choosing or not choosing each word
+        return calculateMaxScore(words, freq, score, 0);
+    }
+    
+    /**
+     * Recursively calculates the maximum score that can be achieved by choosing or not choosing a word.
+     * 
+     * @param words Array of words for which the maximum score needs to be calculated.
+     * @param freq Array representing the frequency of available letters.
+     * @param score Array of scores corresponding to each letter of the alphabet.
+     * @param index Index of the current word being considered.
+     * @return Maximum score that can be achieved by forming words within the given constraints.
+     */
+    private int calculateMaxScore(String[] words, int[] freq, int[] score, int index) {
+        // Base case: If all words are processed, return 0
+        if (index == words.length) {
+            return 0;
+        }
+        
+        // Get the score of the current word
+        int wordScore = getWordScore(words[index], score);
+        int maxScore = 0;
+        
+        // Create a copy of the frequency array to simulate choosing/not choosing the current word
+        int[] tempFreq = freq.clone();
+        boolean canFormWord = true;
+        
+        // Check if the word can be formed with the available letters
+        for (char c : words[index].toCharArray()) {
+            if (tempFreq[c - 'a']-- <= 0) {
+                canFormWord = false;
+            }
+        }
+        
+        // Recursively calculate the maximum score by choosing or not choosing the current word
+        if (canFormWord) {
+            maxScore = Math.max(wordScore + calculateMaxScore(words, tempFreq, score, index + 1),
+                                calculateMaxScore(words, freq, score, index + 1));
+        } else {
+            maxScore = calculateMaxScore(words, freq, score, index + 1);
+        }
+        
+        return maxScore;
+    }
+    
+    /**
+     * Calculates the score of a given word based on the scores of its individual characters.
+     * 
+     * @param word Word for which the score needs to be calculated.
+     * @param score Array of scores corresponding to each letter of the alphabet.
+     * @return Score of the given word.
+     */
+    private int getWordScore(String word, int[] score) {
+        int wordScore = 0;
+        for (char c : word.toCharArray()) {
+            wordScore += score[c - 'a'];
+        }
+        return wordScore;
+    }
+}
+
+
+This updated documentation provides a clear overview of the problem, each method's purpose, input parameters,
+and return values. This will help improve the code's readability and maintainability. Feel free to use and 
+modify this documentation as needed. Let me know if you need further assistance!
