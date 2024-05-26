@@ -1,0 +1,31 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        // Initialize two integer variables A and L to keep track of absences and late arrivals respectively
+        int A = 0;
+        int L = 0;
+
+        // Iterate through each character in the input string s
+        for(char ch : s.toCharArray()){
+            // If the character is 'A', increment the number of absences by 1 and check if it exceeds 1
+            if(ch == 'A'){
+                A += 1;
+                if(A == 2){
+                    return false;
+                }
+            }
+            // If the character is 'L', increment the number of late arrivals by 1 and check if it exceeds 2
+            if(ch == 'L'){
+                L += 1;
+                if(L == 3){
+                    return false;
+                }
+            }
+            // If the character is neither 'A' nor 'L', reset the number of late arrivals to 0
+            else{
+                L = 0;
+            }
+        }
+        // If the number of absences and late arrivals do not exceed the allowed limit, return true
+        return true;
+    }
+}
