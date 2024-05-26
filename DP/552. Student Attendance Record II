@@ -1,0 +1,40 @@
+class Solution {
+    public int checkRecord(int n) {
+        // mod value to prevent overflow
+        int MOD = 1000000007;
+
+        // dp[i][j][k] means number of sequences of length i with j 'A's and ending with k consecutive 'L's
+        long[][][] dp = new long[n + 1][2][3];
+
+        // Base case: there's one way to have an empty sequence
+        dp[0][0][0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= 1; j++) {
+                for (int k = 0; k <= 2; k++) {
+                    // Ending with 'P'
+                    dp[i][j][0] = (dp[i][j][0] + dp[i - 1][j][k]) % MOD;
+
+                    // Ending with 'A'
+                    if (j > 0) {
+                        dp[i][j][0] = (dp[i][j][0] + dp[i - 1][j - 1][k]) % MOD;
+                    }
+
+                    // Ending with 'L'
+                    if (k > 0) {
+                        dp[i][j][k] = (dp[i][j][k] + dp[i - 1][j][k - 1]) % MOD;
+                    }
+                }
+            }
+        }
+
+        long result = 0;
+        for (int j = 0; j <= 1; j++) {
+            for (int k = 0; k <= 2; k++) {
+                result = (result + dp[n][j][k]) % MOD;
+            }
+        }
+
+        return (int) result;
+    }
+}
