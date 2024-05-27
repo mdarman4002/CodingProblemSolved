@@ -1,0 +1,41 @@
+class Solution {
+    public int specialArray(int[] nums) {
+        // Step 1: Count the number of positive integers
+        int count = 0;
+        for (int num : nums) {
+            if (num > 0) {
+                count++;
+            }
+        }
+
+        // Step 2: Create an array to store only positive integers
+        int[] onlyPositive = new int[count];
+        int index = 0;
+        for (int num : nums) {
+            if (num > 0) {
+                onlyPositive[index++] = num;
+            }
+        }
+
+        // Step 3: Check for the special value
+        for (int x = 1; x <= onlyPositive.length; x++) {
+            int greaterOrEqualCount = 0;
+            for (int num : onlyPositive) {
+                if (num >= x) {
+                    greaterOrEqualCount++;
+                }
+            }
+            if (greaterOrEqualCount == x) {
+                return x;
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] nums = {3, 5, 0, 1, 2};
+        System.out.println(sol.specialArray(nums));  // Output will depend on the input array
+    }
+}
