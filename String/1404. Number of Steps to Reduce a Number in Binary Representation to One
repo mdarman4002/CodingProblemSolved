@@ -1,0 +1,18 @@
+
+import java.math.BigInteger;
+
+class Solution {
+    public int numSteps(String s) {
+        BigInteger decimal = new BigInteger(s, 2);
+        int count = 0;
+        while (!decimal.equals(BigInteger.ZERO) && !decimal.equals(BigInteger.ONE)) {
+            if (decimal.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+                decimal = decimal.divide(BigInteger.TWO);
+            } else {
+                decimal = decimal.add(BigInteger.ONE);
+            }
+            count++;
+        }
+        return count;
+    }
+}
