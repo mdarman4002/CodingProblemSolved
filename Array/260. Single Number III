@@ -1,0 +1,37 @@
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        // Initial bitmask value which will eventually contain the XOR of all numbers in
+        // the array
+        int xorResult = 0;
+        // Perform XOR across all elements in the array to find the XOR of the two
+        // unique numbers
+        for (int num : nums) {
+            xorResult ^= num;
+        }
+
+        // Get the rightmost set bit in xorResult which will differentiate the two
+        // unique numbers
+        // Negating xorResult gives its two's complement, and bitwise AND with original
+        // number
+        // isolates the rightmost set bit
+        int rightmostSetBit = xorResult & -xorResult;
+
+        int firstUniqueNumber = 0;
+        // XOR the numbers that have the set bit (same as in rightmostSetBit)
+        // to find one of the unique numbers
+        for (int num : nums) {
+            // Check if the bit is set
+            if ((num & rightmostSetBit) != 0) {
+                firstUniqueNumber ^= num;
+            }
+        }
+
+        // XOR the found unique number with xorResult to find the second unique number
+        // since
+        // xorResult is a XOR of both unique numbers
+        int secondUniqueNumber = xorResult ^ firstUniqueNumber;
+
+        // Return an array containing both unique numbers
+        return new int[] { firstUniqueNumber, secondUniqueNumber };
+    }
+}
