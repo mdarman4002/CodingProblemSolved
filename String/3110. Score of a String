@@ -1,0 +1,27 @@
+// class Solution {
+//     public int scoreOfString(String s) {
+//         int output = 0;
+//         for(int i = 0; i < s.length()-1; i++){
+//             // char char_ = s.charAt(i);
+//             // char charnext = s.charAt(i+1);
+//             // int ascii1 = char_;
+//             // int ascii2 = charnext;
+//             //output += Math.abs(ascii1 - ascii2);
+//             output += Math.abs(s.charAt(i) - s.charAt(i+1));
+
+//         }
+//         return output;
+//     }
+// }
+
+class Solution{
+    public int scoreOfString(String s){
+        return totalScore(0,s);
+    }
+    public static int totalScore(int index,String s){
+        if(index == s.length()-1){
+            return 0;
+        }
+        return Math.abs(s.charAt(index) - s.charAt(index+1)) + totalScore(index+1, s);
+    }
+}
