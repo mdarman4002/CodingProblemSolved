@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public List<String> commonChars(String[] words) {
+        // Initialize the frequency array with high values (infinity)
+        int[] commonFreq = new int[26];
+        for (int i = 0; i < 26; i++) {
+            commonFreq[i] = Integer.MAX_VALUE;
+        }
+
+        // Loop through each word
+        for (String word : words) {
+            // Create a frequency array for the current word
+            int[] wordFreq = new int[26];
+            for (char c : word.toCharArray()) {
+                wordFreq[c - 'a']++;
+            }
+            
+            // Update the global common frequency
+            for (int i = 0; i < 26; i++) {
+                commonFreq[i] = Math.min(commonFreq[i], wordFreq[i]);
+            }
+        }
+
+        // Generate the list of common characters
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < commonFreq[i]; j++) {
+                result.add(String.valueOf((char) (i + 'a')));
+            }
+        }
+
+        return result;
+    }
+
+    // public static void main(String[] args) {
+    //     Solution solution = new Solution();
+    //     String[] words = {"bella", "label", "roller"};
+    //     List<String> result = solution.commonChars(words);
+    //     System.out.println(result);  // Output: [e, l, l]
+    // }
+}
