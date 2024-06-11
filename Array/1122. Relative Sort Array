@@ -1,0 +1,45 @@
+/**
+ * Relative sort array.
+ * 
+ * This method sorts the elements of the first array relative to the elements of the second array.
+ * The elements of the first array that are present in the second array are sorted in the order they appear in the second array.
+ * The elements of the first array that are not present in the second array are sorted in ascending order.
+ * 
+ * @param arr1 The first array to be sorted.
+ * @param arr2 The second array that determines the order of the elements in the first array.
+ * @return The sorted array.
+ */
+public int[] relativeSortArray(int[] arr1, int[] arr2) {
+    int[] freq = new int[1001]; 
+    for (int num : arr1) {
+        freq[num]++;
+    }
+    
+    int[] output = new int[arr1.length];
+    int index = 0;
+    for (int num : arr2) {
+        int count = freq[num];
+        for (int i = 0; i < count; i++) {
+            output[index++] = num;
+        }
+        freq[num] = 0;
+    }
+    
+    int[] sortedArr = new int[1001];
+    for (int i = 0; i < 1001; i++) {
+        if (freq[i] > 0) {
+            sortedArr[i] = freq[i];
+        }
+    }
+    
+    for (int i = 0; i < 1001; i++) {
+        if (sortedArr[i] > 0) {
+            int count = sortedArr[i];
+            for (int j = 0; j < count; j++) {
+                output[index++] = i;
+            }
+        }
+    }
+    
+    return output;
+}
