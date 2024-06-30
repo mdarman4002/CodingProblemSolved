@@ -1,0 +1,64 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+/**
+ * Solution class to insert Greatest Common Divisors into a linked list.
+ */
+class Solution {
+    
+    /**
+     * Inserts the Greatest Common Divisors (GCD) of consecutive node values into the linked list.
+     *
+     * @param head The head of the singly-linked list.
+     * @return The head of the modified linked list where GCDs are inserted between nodes.
+     */
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        // Check if the list is null or has only one node
+        if (head == null || head.next == null) {
+            return head;
+        }
+        
+        // Create a dummy node to facilitate insertion
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        ListNode curr = head;
+        
+        // Traverse the list and insert GCDs between consecutive nodes
+        while (curr != null && curr.next != null) {
+            int val1 = curr.val;
+            int val2 = curr.next.val;
+            int gcd = gcd(val1, val2);  // Calculate GCD of current and next node values
+            ListNode newNode = new ListNode(gcd);
+            newNode.next = curr.next;
+            curr.next = newNode;
+            prev = prev.next.next;  // Move prev to the node after the newly inserted GCD node
+            curr = curr.next.next;  // Move curr to the node after the next original node
+        }
+        
+        // Return the modified list (excluding the dummy node)
+        return dummy.next;
+    }
+    
+    /**
+     * Computes the Greatest Common Divisor (GCD) of two integers using Euclid's algorithm.
+     *
+     * @param a The first integer.
+     * @param b The second integer.
+     * @return The GCD of the two integers.
+     */
+    private int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);  // Recursive call to find GCD using Euclid's algorithm
+    }
+}
