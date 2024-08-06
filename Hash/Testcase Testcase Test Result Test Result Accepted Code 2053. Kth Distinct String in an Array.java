@@ -12,20 +12,28 @@ class Solution {
         for (String str : arr) {
             map.put(str, map.getOrDefault(str, 0) + 1);
         }
-        
-        List<String> distinctList = new ArrayList<>();
-        
-        // Collect distinct strings (i.e., strings that appear exactly once)
-        for (String str : arr) {
-            if (map.get(str) == 1) {
-                distinctList.add(str);
+        for(String str: arr){
+            if(map.get(str) == 1){
+                k--;
+            }
+            if(k == 0){
+                return str;
             }
         }
         
-        // Return the k-th distinct string (1-based index)
-        if (k <= distinctList.size()) {
-            return distinctList.get(k - 1);
-        }
+        // List<String> distinctList = new ArrayList<>();
+        
+     
+        // for (String str : arr) {
+        //     if (map.get(str) == 1) {
+        //         distinctList.add(str);
+        //     }
+        // }
+        
+        // // Return the k-th distinct string (1-based index)
+        // if (k <= distinctList.size()) {
+        //     return distinctList.get(k - 1);
+        // }
         
         return "";
     }
