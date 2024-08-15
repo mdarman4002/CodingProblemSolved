@@ -31,3 +31,19 @@ class Solution {
         } return -1;
     }
 }
+
+
+
+
+GFG//
+Find the element that appears once // O(n) complexity
+
+class Sol {
+    public static int search(int n, int arr[]) {
+        // your code here
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            ans = ans ^arr[i];
+        }return ans;
+    }
+}
