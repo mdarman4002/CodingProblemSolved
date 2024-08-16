@@ -1,30 +1,32 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
 
 public class Main
 {
+    static int row = 3, col = 3;
 	public static void main(String[] args) {
-	
-	    System.out.println(destinationToSource(3,3));
-	    System.out.println(sourceToDest(3,3));
+		System.out.println("sourceToDest");
+		System.out.println(sourceToDest(0,0));
+		System.out.println("destinationToSource");
+		System.out.println(destinationToSource(3,3));
 	}
-	// destination to source
-	public static int destinationToSource(int r, int c){
-	    if(r==0 || c == 0){
+	// source to destination
+	public static int sourceToDest(int r, int c){
+	    if(r == row-1 || c == col-1){
 	        return 1;
 	    }
-	    return destinationToSource(r,c-1) + destinationToSource( r-1,c);
+	    return sourceToDest(r+1,c) + sourceToDest(r,c+1);
 	}
-	//source to destination
-	public static int sourceToDest(int r, int c) {
-    // Check for invalid indices
-    if (r < 0 || c < 0) {
-        return 0;
-    }
-    // Base case: If we are at the destination (0, 0), return 1
-    if (r == 0 && c == 0) {
-        return 1;
-    }
-    // Recursive case: Move right or down
-    return sourceToDest(r - 1, c) + sourceToDest(r, c - 1);
-}
-
+	//destination to source
+	public static int destinationToSource(int r, int c){
+	    if(r == 1|| c == 1){
+	        return 1;
+	    }
+	    return destinationToSource(r-1, c) + destinationToSource(r,c-1);
+	}
 }
