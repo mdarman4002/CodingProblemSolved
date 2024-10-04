@@ -1,108 +1,92 @@
 /**
- * A custom implementation of a stack that supports push, pop, and increment operations.
+ * CustomStack class represents a stack data structure with a fixed maximum size.
  */
 class CustomStack {
     /**
-     * The underlying array to store the stack elements.
+     * The underlying array to store stack elements.
      */
     int stack[];
-    
     /**
-     * The array to store the increment operations.
-     */
-    int operations[];
-    
-    /**
-     * The maximum capacity of the stack.
-     */
-    int capacity;
-    
-    /**
-     * The current size of the stack.
+     * The maximum size of the stack.
      */
     int size;
-    
     /**
-     * The current index of the top element in the stack.
+     * The current index of the stack, pointing to the next available position.
      */
     int index;
-    
+
     /**
-     * Initializes the custom stack with a given maximum size.
+     * Constructor to initialize the CustomStack with a given maximum size.
      * 
-     * @param maxSize the maximum size of the stack
+     * @param maxSize The maximum size of the stack.
      */
     public CustomStack(int maxSize) {
-        stack = new int[maxSize];
-        operations = new int[maxSize];
-        capacity = maxSize;
-        size = 0;
-        index = -1;
+        size = maxSize;
+        stack = new int[size];
+        index = 0;
     }
-    
+
     /**
-     * Pushes an element onto the stack.
+     * Pushes an element onto the stack if it's not full.
      * 
-     * @param x the element to push
+     * @param x The element to be pushed onto the stack.
      */
     public void push(int x) {
         if (isFull()) {
             return;
         }
-        index++;
-        size++;
         stack[index] = x;
+        index++;
     }
-    
+
     /**
-     * Pops an element from the stack.
+     * Pops an element from the stack if it's not empty.
      * 
-     * @return the popped element, or -1 if the stack is empty
+     * @return The popped element, or -1 if the stack is empty.
      */
     public int pop() {
         if (isEmpty()) {
             return -1;
         }
-        int val = stack[index];
-        val += operations[index];
-        if (index > 0) {
-            operations[index - 1] += operations[index];
-        }
-        operations[index] = 0;
         index--;
-        size--;
-        return val;
+        int poped = stack[index];
+        stack[index] = 0;
+        return poped;
     }
-    
+
     /**
-     * Increments the top k elements of the stack by a given value.
+     * Increments elements up to a certain index by a given value.
      * 
-     * @param k the number of elements to increment
-     * @param val the increment value
+     * @param k The index up to which elements should be incremented.
+     * @param val The value to increment the elements by.
      */
     public void increment(int k, int val) {
-        if (isEmpty()) {
-            return;
+        if (k >= size) {
+            for (int i = 0; i < size; i++) {
+                stack[i] = stack[i] + val;
+            }
+        } else {
+            for (int i = 0; i < k; i++) {
+                stack[i] = stack[i] + val;
+            }
         }
-        int num = Math.min(size, k);
-        operations[num - 1] += val;
     }
 
     /**
      * Checks if the stack is full.
      * 
-     * @return true if the stack is full, false otherwise
+     * @return True if the stack is full, false otherwise.
      */
-    private boolean isFull() {
-        return (size == capacity);
+    public boolean isFull() {
+        return size == index;
     }
 
     /**
      * Checks if the stack is empty.
      * 
-     * @return true if the stack is empty, false otherwise
+     * @return True if the stack is empty, false otherwise.
      */
-    private boolean isEmpty() {
-        return (size == 0);
+    public boolean isEmpty() {
+        return index == 0;
     }
 }
