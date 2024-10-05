@@ -1,3 +1,35 @@
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> perm = new ArrayList<>();
+
+        boolean bool[] = new boolean[nums.length];
+        findPermute(nums, bool, perm, ans);
+        return ans;
+       
+    }
+    public void findPermute(int[] nums, boolean[] bool,List<Integer> perm, List<List<Integer>> ans){
+        if(perm.size() == nums.length){
+            ans.add(new ArrayList<>(perm));
+            return; 
+        }
+
+        for(int i = 0; i < nums.length; i++){
+            if(!bool[i]){
+                bool[i] = true;
+                perm.add(nums[i]);
+                findPermute(nums, bool, perm, ans);
+                perm.remove(perm.size()-1);
+                bool[i] = false;
+            }
+        }
+
+    }
+
+
+}
+
 /**
  * This class generates all permutations of a given array of integers.
  */
