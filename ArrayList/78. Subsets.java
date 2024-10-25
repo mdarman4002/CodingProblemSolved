@@ -12,6 +12,15 @@ class Solution {
                 if((num & (1 << j)) != 0 ){
                     list.add(nums[j]);
                 }
+
+//                 For num = 0 (binary 000): list = []
+// For num = 1 (binary 001): list = [1]
+// For num = 2 (binary 010): list = [2]
+// For num = 3 (binary 011): list = [1, 2]
+// For num = 4 (binary 100): list = [3]
+// For num = 5 (binary 101): list = [1, 3]
+// For num = 6 (binary 110): list = [2, 3]
+// For num = 7 (binary 111): list = [1, 2, 3]
             }
             result.add(list);
         }return result;
