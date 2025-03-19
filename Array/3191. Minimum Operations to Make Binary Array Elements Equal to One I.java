@@ -35,3 +35,33 @@ class Solution {
         return operations;
     }
 }
+
+--------------------------------------------------------------------------------------
+
+    
+class Solution {
+    public int minOperations(int[] nums) {
+        int len = nums.length;
+        int i = 0;
+        int j = 2;
+        int end = len - 3;
+        int operations = 0;
+        while (i <= end && j < len) {
+            if (nums[i] == 0) {
+                operations++;
+                reverse(nums, i);
+                reverse(nums, i + 1);
+                reverse(nums, i + 2);
+            }
+            i++;
+            j++;
+        }
+        if(nums[len - 1] == 0 || nums[len - 2] == 0) return -1;
+        return operations;
+    }
+
+    public int[] reverse(int nums[], int index) {
+        nums[index] = nums[index] == 0 ? 1 : 0;
+        return nums;
+    }
+}
