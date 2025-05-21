@@ -20,38 +20,58 @@
 // }
 
 
+// class Solution {
+//     public boolean isZeroArray(int[] nums, int[][] queries) {
+//         int n = nums.length;
+//         // finding differnece
+//         int[] diff = new int[n];
+//         for(int query[]: queries){
+//             int start = query[0];
+//             int end = query[1];
+//             int x = 1;
+//             diff[start] += x;
+//             if(end + 1 < n){
+//                 diff[end+1] -= x;
+//             }
+//         }
+//         // comulitive sum;
+//         int[] res = new int[n];
+//         int cumSum = 0;
+//         for(int i = 0; i < n; i++){
+//             cumSum += diff[i];
+//             res[i] = cumSum;
+//             if(res[i] < nums[i])return false;
+//         }
+//         // check res[i] < nums
+//         // for(int i = 0; i < n; i++){
+//         //     if(res[i] < nums[i]){
+//         //         return false;
+//         //     }
+//         // }
+//         return true;
+//     }
+// }
+
+
+
+
 class Solution {
     public boolean isZeroArray(int[] nums, int[][] queries) {
         int n = nums.length;
-
-        // Step 1: Make difference array using queries
-        int[] diff = new int[n];
-        for (int[] query : queries) {
-            int start = query[0];
-            int end = query[1];
-            int x = 1;
-
-            diff[start] += x;
-            if (end + 1 < n) {
-                diff[end + 1] -= x;
-            }
+        int[] diff = new int[n+1];
+        for(int query[]: queries){
+            int left = query[0];
+            int right = query[1];
+            diff[left]--;
+            diff[right+1]++;
         }
-
-        // Step 2: Compute cumulative effect on each index
-        int[] result = new int[n];
-        int cumSum = 0;
-        for (int i = 0; i < n; i++) {
-            cumSum += diff[i];
-            result[i] = cumSum;
+        int sum = 0;
+        int diffSum = 0;
+        for(int i = 0; i < n; i++){
+            diffSum += diff[i];
+            sum  = diffSum + nums[i];
+            if(sum > 0)return false;
         }
-
-        // Step 3: Check if each value can reach 0
-        for (int i = 0; i < n; i++) {
-            if (result[i] < nums[i]) {
-                return false; // nums[i] won't become 0
-            }
-        }
-
         return true;
     }
 }
